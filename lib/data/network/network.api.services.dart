@@ -7,7 +7,7 @@ import 'package:http/http.dart' as http;
 
 class NetworkApiClass extends BaseNetworkApi {
   Map<String, String> headers = {
-    "secretkey": Global.SECRET_KEY,
+    "secretkey": "ThePublicanSecretKey",
   };
 
   @override

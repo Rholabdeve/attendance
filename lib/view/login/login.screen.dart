@@ -26,7 +26,7 @@ class LoginPage extends GetView<LoginController> {
                     children: [
                       Padding(
                         padding: const EdgeInsets.all(10.0),
-                        child: Image.asset(Assets.APP_LOGO),
+                        child: Image.asset(Assets.DISTRHO_LOGO),
                       ),
                       const SizedBox(
                         height: 50.0,
@@ -97,7 +97,11 @@ class LoginPage extends GetView<LoginController> {
                       controller.progressStatus.value == ProgressStatus.loading,
                   isSuccess:
                       controller.progressStatus.value == ProgressStatus.success,
-                  onPressed: () {},
+                  onPressed: () {
+                    controller.login(
+                        email: controller.emailController.text,
+                        password: controller.passwordController.text);
+                  },
                   style: TextStyle(
                       color: AppColors.whiteColor,
                       fontWeight: FontWeight.w900,

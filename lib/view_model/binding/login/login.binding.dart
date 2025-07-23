@@ -1,9 +1,9 @@
-import 'package:attendance_system_app/view_model/controller/splash/splash.controller.dart';
+import 'package:attendance_system_app/view_model/controller/login/login.controller.dart';
 import 'package:get/get.dart';
 
 class LoginBinding extends Bindings {
   @override
   void dependencies() {
-    Get.lazyPut(() => SplashController());
+    Get.lazyPut(() => LoginController());
   }
 }

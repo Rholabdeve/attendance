@@ -8,7 +8,7 @@ class LoginRepository {
   static BaseNetworkApi apiService = NetworkApiClass();
   static String secretkey = Global.SECRET_KEY;
   static String loginApi = Global.loginUrl;
-  static Future<LoginModel> login(
+  static Future<LoginModel> loginRepo(
     String userEmail,
     String password,
   ) async {
@@ -16,7 +16,7 @@ class LoginRepository {
       final response = await apiService
           .postApi(loginApi, {"email": userEmail, 'password': password});
       if (kDebugMode) {
-        print(" login Respone  $response");
+        print("login Respone  $response");
       }
 
       return LoginModel.fromJson(response);

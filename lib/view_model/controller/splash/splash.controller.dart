@@ -1,10 +1,13 @@
 import 'dart:async';
 import 'package:attendance_system_app/resource/routes/route.name.dart';
 import 'package:attendance_system_app/view_model/controller/session/session.controller.dart';
-import 'package:flutter/material.dart';
+
+import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 
 class SplashController extends GetxController {
+  SplashController();
+
   @override
   void onInit() {
     super.onInit();
@@ -20,17 +23,18 @@ class SplashController extends GetxController {
     session
         .loadSession()
         .then((value) => _timer = Timer(const Duration(seconds: 1), () {
-              if (session.userSession.data!.id != null) {
-                Get.snackbar("Dashboard", "screen");
+              final userId = session.userSession.data?.id;
+
+              if (userId != null) {
               } else {
-                Get.toNamed(Routes.LOGIN);
+                Get.offAllNamed(Routes.LOGIN);
               }
             }));
   }
 
   @override
   void dispose() {
-    _timer?.cancel();
     super.dispose();
+    _timer?.cancel();
   }
 }

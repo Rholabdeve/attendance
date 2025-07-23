@@ -1,6 +1,8 @@
 import 'package:attendance_system_app/resource/routes/route.name.dart';
+import 'package:attendance_system_app/view/dashboard/dashboard.screen.dart';
 import 'package:attendance_system_app/view/login/login.screen.dart';
 import 'package:attendance_system_app/view/splash/splash.screen.dart';
+import 'package:attendance_system_app/view_model/binding/dashboard/dashboard.binding.dart';
 import 'package:attendance_system_app/view_model/binding/login/login.binding.dart';
 import 'package:attendance_system_app/view_model/binding/splash/splash.binding.dart';
 import 'package:flutter/material.dart';
@@ -23,7 +25,12 @@ class Pages {
             page: () => const LoginPage(),
             binding: LoginBinding(),
             transition: _routeTransition);
-
+      case Routes.DASHBOARD:
+        return GetPageRoute(
+            settings: setting,
+            page: () => const DashBoardPage(),
+            binding: DashBoardBinding(),
+            transition: _routeTransition);
       default:
         return null;
     }

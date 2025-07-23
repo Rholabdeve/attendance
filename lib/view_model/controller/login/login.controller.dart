@@ -38,33 +38,33 @@ class LoginController extends GetxController {
 
   Future<LoginModel?> login(
       {required String email, required String password}) async {
-    try {
-      isLoading.value = true;
-      await Future.delayed(Duration.zero);
-      LoginModel response = await LoginRepository.login(email, password);
-      if (response.status == "success") {
-        isLoading.value = false;
-        final session = SessionController.instance;
-        session.setSession(response.data?.id);
-        if (kDebugMode) {
-          print(response.data?.id);
+    if (formKey.currentState?.validate() ?? false) {
+      try {
+        isLoading.value = true;
+        await Future.delayed(Duration.zero);
+        LoginModel response = await LoginRepository.loginRepo(email, password);
+        if (response.status == "success") {
+          isLoading.value = false;
+          final session = SessionController.instance;
+          session.setSession(response.data?.id);
+          if (kDebugMode) {
+            print(response.data?.id);
+          }
+          progressStatus.value = ProgressStatus.success;
+
+          return response;
+        } else {
+          isLoading.value = false;
+          progressStatus.value = ProgressStatus.failure;
+          Get.snackbar('Login Failed', response.message ?? "Unknown error");
+          return null;
         }
-        progressStatus.value = ProgressStatus.success;
-        if (kDebugMode) {
-          print("Go to Dashboard");
-        }
-        return response;
-      } else {
+      } catch (e) {
         isLoading.value = false;
         progressStatus.value = ProgressStatus.failure;
-        Get.snackbar('Login Failed', response.message ?? "Unknown error");
-        return null;
-      }
-    } catch (e) {
-      isLoading.value = false;
-      progressStatus.value = ProgressStatus.failure;
-      if (kDebugMode) {
-        print(e.toString());
+        if (kDebugMode) {
+          print(e.toString());
+        }
       }
     }
     return null;
