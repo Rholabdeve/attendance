@@ -18,6 +18,10 @@ class LoginRepository {
       if (kDebugMode) {
         print("login Respone  $response");
       }
+      if (response['status'] == 'error') {
+        final message = response['message'] ?? 'Login failed';
+        throw Exception(message);
+      }
 
       return LoginModel.fromJson(response);
     } catch (e) {

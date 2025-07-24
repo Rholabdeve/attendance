@@ -22,10 +22,11 @@ class SplashController extends GetxController {
     await session.loadSession();
     session
         .loadSession()
-        .then((value) => _timer = Timer(const Duration(seconds: 1), () {
+        .then((value) => _timer = Timer(const Duration(seconds: 3), () {
               final userId = session.userSession.data?.id;
 
               if (userId != null) {
+                Get.offAllNamed(Routes.DASHBOARD);
               } else {
                 Get.offAllNamed(Routes.LOGIN);
               }

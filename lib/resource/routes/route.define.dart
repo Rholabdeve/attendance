@@ -1,7 +1,12 @@
 import 'package:attendance_system_app/resource/routes/route.name.dart';
+import 'package:attendance_system_app/view/addteacher/add.teacher.dart';
+import 'package:attendance_system_app/view/checkin/checkin.dart';
+import 'package:attendance_system_app/view/checkout/checkout.dart';
 import 'package:attendance_system_app/view/dashboard/dashboard.screen.dart';
 import 'package:attendance_system_app/view/login/login.screen.dart';
 import 'package:attendance_system_app/view/splash/splash.screen.dart';
+import 'package:attendance_system_app/view_model/binding/checkin/checkin.binding.dart';
+import 'package:attendance_system_app/view_model/binding/checkout/checkout.bindings.dart';
 import 'package:attendance_system_app/view_model/binding/dashboard/dashboard.binding.dart';
 import 'package:attendance_system_app/view_model/binding/login/login.binding.dart';
 import 'package:attendance_system_app/view_model/binding/splash/splash.binding.dart';
@@ -30,6 +35,24 @@ class Pages {
             settings: setting,
             page: () => const DashBoardPage(),
             binding: DashBoardBinding(),
+            transition: _routeTransition);
+      case Routes.ADDTEACHER:
+        return GetPageRoute(
+            settings: setting,
+            page: () => const ADDTeacherPage(),
+            binding: DashBoardBinding(),
+            transition: _routeTransition);
+      case Routes.CHECKIN:
+        return GetPageRoute(
+            settings: setting,
+            page: () => const CheckInPage(),
+            binding: CheckInBindings(),
+            transition: _routeTransition);
+      case Routes.CHECKOUT:
+        return GetPageRoute(
+            settings: setting,
+            page: () => const CheckOutPage(),
+            binding: CheckOutBindings(),
             transition: _routeTransition);
       default:
         return null;

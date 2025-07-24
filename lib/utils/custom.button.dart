@@ -7,6 +7,7 @@ class CustomButton extends StatelessWidget {
   final double borderRadius;
   final EdgeInsetsGeometry padding;
   final double fontSize;
+  final Color? buttonColor;
   final FontWeight fontWeight;
   final bool isLoading;
   final bool isSuccess;
@@ -17,6 +18,7 @@ class CustomButton extends StatelessWidget {
     super.key,
     required this.text,
     required this.onPressed,
+    this.buttonColor,
     this.elevation = 2.0,
     this.borderRadius = 8.0,
     this.padding = const EdgeInsets.symmetric(vertical: 15.0, horizontal: 20.0),
@@ -30,7 +32,7 @@ class CustomButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final primaryColor = Theme.of(context).primaryColor;
+    final primaryColor = buttonColor ?? Theme.of(context).primaryColor;
 
     return ElevatedButton(
       onPressed: isLoading ? null : onPressed,
@@ -45,8 +47,15 @@ class CustomButton extends StatelessWidget {
         padding: MaterialStateProperty.all(padding),
       ),
       child: isLoading
-          ? CircularProgressIndicator(
-              valueColor: AlwaysStoppedAnimation<Color>(textColor),
+          ? const Center(
+              child: SizedBox(
+                height: 20,
+                width: 20,
+                child: CircularProgressIndicator(
+                  strokeWidth: 4,
+                  valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                ),
+              ),
             )
           : Center(
               child: Text(

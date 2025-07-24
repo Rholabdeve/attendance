@@ -35,3 +35,8 @@ class InvalidUrlException extends AppException {
   InvalidUrlException([String message = "The provided URL is invalid"])
       : super(message: message, prefix: "URL Error: ");
 }
+
+class BadRequestException extends AppException {
+  BadRequestException([String message = "Bad request"])
+      : super(message: message, prefix: "Bad Request Error: ");
+}

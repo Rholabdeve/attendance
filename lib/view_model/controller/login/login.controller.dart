@@ -1,5 +1,6 @@
 import 'package:attendance_system_app/model/login.model.dart';
 import 'package:attendance_system_app/repository/login/login.repo.dart';
+import 'package:attendance_system_app/resource/routes/route.name.dart';
 import 'package:attendance_system_app/view_model/controller/session/session.controller.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -40,6 +41,7 @@ class LoginController extends GetxController {
       {required String email, required String password}) async {
     if (formKey.currentState?.validate() ?? false) {
       try {
+        progressStatus.value = ProgressStatus.loading;
         isLoading.value = true;
         await Future.delayed(Duration.zero);
         LoginModel response = await LoginRepository.loginRepo(email, password);
@@ -47,12 +49,18 @@ class LoginController extends GetxController {
           isLoading.value = false;
           final session = SessionController.instance;
           session.setSession(response.data?.id);
+
           if (kDebugMode) {
             print(response.data?.id);
           }
           progressStatus.value = ProgressStatus.success;
+          Get.snackbar("Message", "Login SuccessFully");
+          Get.toNamed(Routes.DASHBOARD);
 
           return response;
+        } else if (response.message == "error") {
+          isLoading.value = false;
+          Get.snackbar("Error", response.message ?? "");
         } else {
           isLoading.value = false;
           progressStatus.value = ProgressStatus.failure;
@@ -62,9 +70,12 @@ class LoginController extends GetxController {
       } catch (e) {
         isLoading.value = false;
         progressStatus.value = ProgressStatus.failure;
+        Get.snackbar("Error", e.toString().replaceAll("Exception: ", ""));
+
         if (kDebugMode) {
           print(e.toString());
         }
+        return null;
       }
     }
     return null;
