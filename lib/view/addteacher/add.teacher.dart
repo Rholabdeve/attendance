@@ -43,6 +43,17 @@ class ADDTeacherPage extends GetView<ADDTeacherController> {
                           validator: (p0) {
                             return controller.validateId;
                           },
+                          onTap: () {
+                            controller.employeeFirstName.clear();
+                            controller.employeeLastName.clear();
+                          },
+                          onFieldSubmitted: (value) async {
+                            controller.progressStatus.value =
+                                ProgressStatus.loading;
+                            await controller.fatchteacher(empid: value.trim());
+                            controller.progressStatus.value =
+                                ProgressStatus.success;
+                          },
                           decoration: const InputDecoration(
                               hintText: 'Enter Employee ID',
                               border: OutlineInputBorder()),

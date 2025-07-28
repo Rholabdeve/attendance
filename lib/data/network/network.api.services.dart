@@ -44,7 +44,7 @@ class NetworkApiClass extends BaseNetworkApi {
         case 200:
           return json;
 
-        case 400:
+        case 404:
           throw BadRequestException(json['message'] ?? 'Bad Request');
 
         case 401:
