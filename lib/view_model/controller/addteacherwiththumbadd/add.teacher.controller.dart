@@ -1,4 +1,6 @@
+import 'package:attendance_system_app/model/addteacherTumb.model.dart';
 import 'package:attendance_system_app/model/fatchteacher.model.dart';
+import 'package:attendance_system_app/repository/addthumbteacher/add.thumb.teacher.dart';
 import 'package:attendance_system_app/repository/fatchteacher/fatch.teacher.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
@@ -69,5 +71,47 @@ class ADDTeacherController extends GetxController {
         Get.snackbar("Message", "Teacher Not Found");
       }
     }
+  }
+
+  Future<void> addTeacherThumb(
+      {required String empid,
+      required String firstname,
+      required String lastname,
+      required bool thumbid}) async {
+    if (formKey.currentState?.validate() ?? false) {
+      try {
+        progressStatus.value = ProgressStatus.loading;
+        isLoading.value = true;
+        AddThumbTeacher result =
+            await AddThumbTeacherRepository.addthumbteacherdata(
+                empid: empid,
+                firstname: firstname,
+                lastname: lastname,
+                thumbid: thumbid);
+        if (result.status == "status") {
+          isLoading.value = false;
+          progressStatus.value = ProgressStatus.success;
+          if (kDebugMode) {
+            print("Thumb data Added");
+          }
+          Get.snackbar("Message", "Thumb data submitted successfully");
+        } else if (result.status == "error") {
+          isLoading.value = false;
+          Get.snackbar("Error", "Something went wrong");
+        } else {
+          isLoading.value = false;
+          progressStatus.value = ProgressStatus.failure;
+          Get.snackbar("Error", "Something went wrong!");
+        }
+      } catch (e) {
+        if (kDebugMode) {
+          print(e.toString());
+          isLoading.value = false;
+          progressStatus.value = ProgressStatus.failure;
+          Get.snackbar("Message", "Teacher Already Add");
+        }
+      }
+    }
+    return;
   }
 }

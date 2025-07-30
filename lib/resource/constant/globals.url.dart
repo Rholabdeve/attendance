@@ -6,4 +6,5 @@ class Global {
   static String BASE_URL = dotenv.env['Base_Url'] ?? '';
   static String loginUrl = '$BASE_URL/api/check-auth';
   static String FETCH_TEACHER = '$BASE_URL/api/fetch-teacher';
+  static String ADD_TEACHER_THUMB = '$BASE_URL/api/submit-teacher-thumb';
 }

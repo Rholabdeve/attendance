@@ -2,8 +2,9 @@ import 'package:attendance_system_app/resource/constant/assets.dart';
 import 'package:attendance_system_app/resource/constant/constant.dart';
 import 'package:attendance_system_app/utils/custom.button.dart';
 import 'package:attendance_system_app/utils/custom_textfield.dart';
-import 'package:attendance_system_app/view_model/controller/addteacher/add.teacher.controller.dart';
+import 'package:attendance_system_app/view_model/controller/addteacherwiththumbadd/add.teacher.controller.dart';
 import 'package:dotted_border/dotted_border.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -132,7 +133,20 @@ class ADDTeacherPage extends GetView<ADDTeacherController> {
                       controller.progressStatus.value == ProgressStatus.loading,
                   isSuccess:
                       controller.progressStatus.value == ProgressStatus.success,
-                  onPressed: () {},
+                  onPressed: () {
+                    if (kDebugMode) {
+                      print("empid ${controller.employeeId.text}");
+                      print("firstname ${controller.employeeFirstName.text}");
+                      print("lastname ${controller.employeeLastName.text}");
+                      print("thumbid ${true}");
+                    }
+
+                    // controller.addTeacherThumb(
+                    //     empid: controller.employeeId.text,
+                    //     firstname: controller.employeeFirstName.text,
+                    //     lastname: controller.employeeLastName.text,
+                    //     thumbid: true);
+                  },
                   style: TextStyle(
                       color: AppColors.whiteColor,
                       fontWeight: FontWeight.w900,
