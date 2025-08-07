@@ -70,7 +70,6 @@ class LoginController extends GetxController {
       } catch (e) {
         isLoading.value = false;
         progressStatus.value = ProgressStatus.failure;
-        Get.snackbar("Message", "Invalid email or password");
 
         if (kDebugMode) {
           print(e.toString());

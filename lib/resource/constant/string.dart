@@ -8,4 +8,6 @@ class AppStrings {
       CHECKIN = "CHECKIN",
       CHECKOUT = "CHECKOUT";
   static const String SUBMIT = "Submit";
+  static const String NO_TEACHER_ASSIGN = "NO Data";
+  static const String SELECT_NAME = "Select Name";
 }

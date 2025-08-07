@@ -15,7 +15,10 @@ class ADDTeacherPage extends GetView<ADDTeacherController> {
   Widget build(BuildContext context) {
     Get.put(ADDTeacherController());
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        title: Text("Add Teacher"),
+        centerTitle: true,
+      ),
       body: Column(
         children: [
           Expanded(
@@ -30,7 +33,10 @@ class ADDTeacherPage extends GetView<ADDTeacherController> {
                     children: [
                       Padding(
                         padding: const EdgeInsets.all(10.0),
-                        child: Image.asset(Assets.DISTRHO_LOGO),
+                        child: Image.asset(
+                          Assets.DISTRHO_LOGO,
+                          height: 100,
+                        ),
                       ),
                       const SizedBox(
                         height: 50.0,
@@ -63,6 +69,7 @@ class ADDTeacherPage extends GetView<ADDTeacherController> {
                       Padding(
                         padding: const EdgeInsets.all(10.0),
                         child: CustomTextFormField(
+                          readOnly: true,
                           controller: controller.employeeFirstName,
                           keyboardType: TextInputType.emailAddress,
                           textInputAction: TextInputAction.next,
@@ -77,6 +84,7 @@ class ADDTeacherPage extends GetView<ADDTeacherController> {
                       Padding(
                         padding: const EdgeInsets.all(10.0),
                         child: CustomTextFormField(
+                          readOnly: true,
                           controller: controller.employeeLastName,
                           keyboardType: TextInputType.visiblePassword,
                           textInputAction: TextInputAction.done,
@@ -88,21 +96,37 @@ class ADDTeacherPage extends GetView<ADDTeacherController> {
                               border: OutlineInputBorder()),
                         ),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 10.0),
-                        child: DottedBorder(
-                          color: Colors.grey,
-                          borderType: BorderType.RRect,
-                          radius: const Radius.circular(12),
-                          dashPattern: const [8, 4],
-                          strokeWidth: 2,
-                          child: Container(
-                            height: 150,
-                            width: 150,
-                            padding: const EdgeInsets.all(10),
-                            child: Image.asset(
-                              Assets.FINGURE,
-                              fit: BoxFit.contain,
+                      Obx(
+                        () => GestureDetector(
+                          onTap: () {
+                            controller.scanThumb();
+                          },
+                          child: Padding(
+                            padding: const EdgeInsets.only(top: 10.0),
+                            child: DottedBorder(
+                              color: Colors.grey,
+                              borderType: BorderType.RRect,
+                              radius: const Radius.circular(12),
+                              dashPattern: const [8, 4],
+                              strokeWidth: 2,
+                              child: Container(
+                                height: 100,
+                                width: 100,
+                                alignment: Alignment.center,
+                                padding: const EdgeInsets.all(10),
+                                child: controller.isScanningThumb.value
+                                    ? const SizedBox(
+                                        height: 25,
+                                        width: 25,
+                                        child: CircularProgressIndicator(
+                                          strokeWidth: 3,
+                                          color: Color(0xff00008B),
+                                        ))
+                                    : Image.asset(
+                                        Assets.FINGURE,
+                                        fit: BoxFit.contain,
+                                      ),
+                              ),
                             ),
                           ),
                         ),
@@ -133,7 +157,7 @@ class ADDTeacherPage extends GetView<ADDTeacherController> {
                       controller.progressStatus.value == ProgressStatus.loading,
                   isSuccess:
                       controller.progressStatus.value == ProgressStatus.success,
-                  onPressed: () {
+                  onPressed: () async {
                     if (kDebugMode) {
                       print("empid ${controller.employeeId.text}");
                       print("firstname ${controller.employeeFirstName.text}");
@@ -141,11 +165,11 @@ class ADDTeacherPage extends GetView<ADDTeacherController> {
                       print("thumbid ${true}");
                     }
 
-                    // controller.addTeacherThumb(
-                    //     empid: controller.employeeId.text,
-                    //     firstname: controller.employeeFirstName.text,
-                    //     lastname: controller.employeeLastName.text,
-                    //     thumbid: true);
+                    await controller.addTeacherThumb(
+                        empid: controller.employeeId.text,
+                        firstname: controller.employeeFirstName.text,
+                        lastname: controller.employeeLastName.text,
+                        thumbid: "true");
                   },
                   style: TextStyle(
                       color: AppColors.whiteColor,

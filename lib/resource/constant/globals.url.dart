@@ -1,10 +1,12 @@
-import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter_config/flutter_config.dart';
 // ignore_for_file: non_constant_identifier_names
 
 class Global {
-  static String SECRET_KEY = dotenv.env['SECRET_KEY'] ?? '';
-  static String BASE_URL = dotenv.env['Base_Url'] ?? '';
+  static String SECRET_KEY = FlutterConfig.get('SECRET_KEY');
+  static String BASE_URL = FlutterConfig.get('Base_Url');
   static String loginUrl = '$BASE_URL/api/check-auth';
   static String FETCH_TEACHER = '$BASE_URL/api/fetch-teacher';
   static String ADD_TEACHER_THUMB = '$BASE_URL/api/submit-teacher-thumb';
+  static String TEACHER_NAME = '$BASE_URL/api/fetchteacherdataforattandence';
+  static String TEACHER_ATTENDANCE = '$BASE_URL/api/submit-teacher-attandence';
 }

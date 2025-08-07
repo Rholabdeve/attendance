@@ -26,7 +26,10 @@ class LoginPage extends GetView<LoginController> {
                     children: [
                       Padding(
                         padding: const EdgeInsets.all(10.0),
-                        child: Image.asset(Assets.DISTRHO_LOGO),
+                        child: Image.asset(
+                          Assets.DISTRHO_LOGO,
+                          height: 150,
+                        ),
                       ),
                       const SizedBox(
                         height: 50.0,

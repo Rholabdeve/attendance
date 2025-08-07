@@ -14,7 +14,7 @@ class DashBoardPage extends GetView<DashboardController> {
     return Scaffold(
         appBar: AppBar(
           title: const Image(
-            height: 30,
+            height: 50,
             fit: BoxFit.contain,
             image: AssetImage(Assets.DISTRHO_LOGO),
           ),

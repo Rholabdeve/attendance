@@ -13,7 +13,7 @@ class AddThumbTeacherRepository {
       {required String empid,
       required String firstname,
       required String lastname,
-      required bool thumbid}) async {
+      required String thumbid}) async {
     try {
       final response = await apiservices.postApi(addThumbTeacherUrl, {
         "empid": empid,
