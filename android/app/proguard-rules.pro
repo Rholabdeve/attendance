@@ -1,1 +1,0 @@
--keep class com.example.attendance_system_app.BuildConfig { *; }

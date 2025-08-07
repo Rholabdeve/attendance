@@ -1,15 +1,12 @@
 import 'package:attendance_system_app/resource/routes/route.define.dart';
 import 'package:attendance_system_app/resource/routes/route.name.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_config/flutter_config.dart';
 import 'package:get/get.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await FlutterConfig.loadEnvVariables();
 
   runApp(const MyApp());
 }
@@ -19,10 +16,6 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (kDebugMode) {
-      print("BaseUrl ${FlutterConfig.get('Base_Url')}");
-      print("Key  ${FlutterConfig.get('SECRET_KEY')}");
-    }
     return GetMaterialApp(
       title: 'Distrho',
       navigatorKey: navigatorKey,

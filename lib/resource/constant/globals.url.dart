@@ -1,9 +1,8 @@
-import 'package:flutter_config/flutter_config.dart';
 // ignore_for_file: non_constant_identifier_names
 
 class Global {
-  static String SECRET_KEY = FlutterConfig.get('SECRET_KEY');
-  static String BASE_URL = FlutterConfig.get('Base_Url');
+  static String SECRET_KEY = "ThePublicanSecretKey";
+  static String BASE_URL = "https://thepublicanschool.com";
   static String loginUrl = '$BASE_URL/api/check-auth';
   static String FETCH_TEACHER = '$BASE_URL/api/fetch-teacher';
   static String ADD_TEACHER_THUMB = '$BASE_URL/api/submit-teacher-thumb';
